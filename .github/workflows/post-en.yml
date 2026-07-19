@@ -1,0 +1,57 @@
+# PURPOSE: ここらのリール動画を英語で1日3回、@waveblasttaiyo へ自動投稿する。
+# 枠（JST）: 07:00 / 15:00 / 23:00 ＝ UTC 22:00(前日) / 06:00 / 14:00
+# 英語枠は海外時間を狙う（JST23:00＝欧州午後・米国朝／JST07:00＝米国夕方／JST15:00＝欧州朝）。
+name: Post kokora reel (EN)
+
+on:
+  schedule:
+    - cron: "0 22 * * *"   # JST 07:00
+    - cron: "0 6 * * *"    # JST 15:00
+    - cron: "0 14 * * *"   # JST 23:00
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true で投稿せず内容だけ確認"
+        required: false
+        default: "false"
+
+concurrency:
+  group: kokora-post
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install --quiet tweepy
+
+      - name: Post (EN)
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            python scripts/post_to_x.py --lang en --dry-run
+          else
+            python scripts/post_to_x.py --lang en
+          fi
+
+      - name: Save rotation state
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add queue/state.json
+          git diff --staged --quiet || git commit -m "log: kokora EN 投稿記録 $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
