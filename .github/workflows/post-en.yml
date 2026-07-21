@@ -1,12 +1,11 @@
-# PURPOSE: ここらのリール動画を英語で1日3回、@waveblasttaiyo へ自動投稿する。
-# 枠（JST）: 07:00 / 15:00 / 23:00 ＝ UTC 22:00(前日) / 06:00 / 14:00
-# 英語枠は海外時間を狙う（JST23:00＝欧州午後・米国朝／JST07:00＝米国夕方／JST15:00＝欧州朝）。
+# PURPOSE: ここらのリール動画を英語で1日1回、@waveblasttaiyo へ自動投稿する。
+# 枠（JST）: 23:00 ＝ UTC 14:00（欧州の午後・米国の朝を狙う）
+#
+# 頻度の根拠（2026-07-20 変更）: post-jp.yml の冒頭コメントを参照。
 name: Post kokora reel (EN)
 
 on:
   schedule:
-    - cron: "0 22 * * *"   # JST 07:00
-    - cron: "0 6 * * *"    # JST 15:00
     - cron: "0 14 * * *"   # JST 23:00
   workflow_dispatch:
     inputs:
