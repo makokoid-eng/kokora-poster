@@ -1,0 +1,73 @@
+# PURPOSE: 熊本地震（令和8年）の災害支援テキストを @waveblasttaiyo へ1日8回投稿する。
+#          ここらプロモ用のリール投稿（post-jp / post-en）は Disable 済み。
+#          同じリポ・同じXアカウント・同じ Secrets を再利用し、動画なしのテキストのみを配信する。
+#
+# ⚠️ 有効化はまことのOK後。下の schedule はコメントアウトしてあり、今は自動投稿は発火しない。
+#    レビュー完了後に schedule のコメントを外してコミットすると、翌枠から自動投稿が始まる。
+#
+# 投稿枠（JST）: 08:00 / 10:00 / 12:00 / 14:00 / 16:00 / 18:00 / 20:00 / 22:00（約2時間おき）
+# 内容は queue/support_queue.json の先頭から順番に1件ずつ。末尾まで出したら自動で止まる。
+
+name: Post kokora saigai support (JA)
+
+on:
+  # --- 有効化するときは、次の schedule ブロックのコメント(#)を外す ---
+  # schedule:
+  #   - cron: "0 23 * * *"   # JST 08:00
+  #   - cron: "0 1 * * *"    # JST 10:00
+  #   - cron: "0 3 * * *"    # JST 12:00
+  #   - cron: "0 5 * * *"    # JST 14:00
+  #   - cron: "0 7 * * *"    # JST 16:00
+  #   - cron: "0 9 * * *"    # JST 18:00
+  #   - cron: "0 11 * * *"   # JST 20:00
+  #   - cron: "0 13 * * *"   # JST 22:00
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true で投稿せず、次に出る本文だけ確認（レビュー用）"
+        required: false
+        default: "true"
+
+concurrency:
+  group: kokora-support-post
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install --quiet tweepy
+
+      - name: Post (support / JA)
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+        run: |
+          # schedule(cron)起動時は inputs.dry_run が空になる。空=dry-runにすると
+          # 「有効化しても全枠dry-runで1本も投稿されない」静かな失敗になるため、
+          # schedule起動＝必ず実投稿。workflow_dispatch のときだけ dry_run で分岐する。
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
+            python scripts/post_support_to_x.py           # 実投稿
+          else
+            python scripts/post_support_to_x.py --dry-run  # workflow_dispatch の dry_run=true（既定）
+          fi
+
+      - name: Save queue state
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.dry_run == 'false' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add queue/support_state.json
+          git diff --staged --quiet || git commit -m "log: kokora 災害支援 投稿記録 $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
