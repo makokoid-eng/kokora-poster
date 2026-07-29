@@ -11,16 +11,16 @@
 name: Post kokora saigai support (JA)
 
 on:
-  # --- 有効化するときは、次の schedule ブロックのコメント(#)を外す ---
-  # schedule:
-  #   - cron: "0 23 * * *"   # JST 08:00
-  #   - cron: "0 1 * * *"    # JST 10:00
-  #   - cron: "0 3 * * *"    # JST 12:00
-  #   - cron: "0 5 * * *"    # JST 14:00
-  #   - cron: "0 7 * * *"    # JST 16:00
-  #   - cron: "0 9 * * *"    # JST 18:00
-  #   - cron: "0 11 * * *"   # JST 20:00
-  #   - cron: "0 13 * * *"   # JST 22:00
+  # 有効化済み（2026-07-29）。停止するときは schedule ブロックをコメントアウト or ワークフローを Disable。
+  schedule:
+    - cron: "0 23 * * *"   # JST 08:00
+    - cron: "0 1 * * *"    # JST 10:00
+    - cron: "0 3 * * *"    # JST 12:00
+    - cron: "0 5 * * *"    # JST 14:00
+    - cron: "0 7 * * *"    # JST 16:00
+    - cron: "0 9 * * *"    # JST 18:00
+    - cron: "0 11 * * *"   # JST 20:00
+    - cron: "0 13 * * *"   # JST 22:00
   workflow_dispatch:
     inputs:
       dry_run:
