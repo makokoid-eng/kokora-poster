@@ -20,7 +20,13 @@
       "band": "night",
       "category": "充電(スマホ・軸)",
       "tweet_id": "2082426227168882952"
+    },
+    {
+      "at": "2026-07-29 22:42",
+      "band": "night",
+      "category": "spot-避難所(夜間)",
+      "tweet_id": "2082461808829292916"
     }
   ],
-  "night_index": 1
+  "night_index": 2
 }
