@@ -100,7 +100,16 @@ def main() -> int:
         access_token=at, access_token_secret=ats,
     )
 
-    resp = client.create_tweet(text=item["text"])  # テキストのみ・media なし
+    try:
+        resp = client.create_tweet(text=item["text"])  # テキストのみ・media なし
+    except Exception as e:
+        # 静かに死なせない：支出上限/権限などの失敗は GitHub Actions のエラー注釈＋非ゼロ終了で必ず目立たせる
+        msg = str(e)
+        hint = ""
+        if "spend cap" in msg.lower() or "403" in msg or "429" in msg.lower():
+            hint = " ← X APIの支出上限/レート/権限の可能性。コンソールでクレジット残高と支出上限を確認。"
+        print(f"::error::投稿失敗（support）: {msg}{hint}")
+        raise
     tweet_id = resp.data.get("id") if resp and resp.data else None
     print(f"posted: https://x.com/waveblasttaiyo/status/{tweet_id}")
 
