@@ -1,0 +1,37 @@
+[
+  {
+    "id": "JA-1",
+    "lang": "ja",
+    "weight": 3,
+    "pin": true,
+    "text": "🎉 ここら、Androidでも公開！ iOSに続きGoogle Playでも使えます。行きたい場所を写真とメモで“自分の地図”に保存。旅先で迷わない、あなただけの地図を。📱iOS/Android両対応\niOS→ https://apps.apple.com/jp/app/kokora/id6789018848\nAndroid→ https://play.google.com/store/apps/details?id=org.akarilab.kokora\n#ここら #地図アプリ #Android"
+  },
+  {
+    "id": "JA-2",
+    "lang": "ja",
+    "weight": 1,
+    "pin": false,
+    "text": "「保存したあのお店どこだっけ？」をなくしたくて作りました。SNSで見つけた行きたい場所を写真とメモで自分の地図に。ここら、Androidでも公開。\niOS→ https://apps.apple.com/jp/app/kokora/id6789018848\nAndroid→ https://play.google.com/store/apps/details?id=org.akarilab.kokora\n#ここら #地図アプリ #旅行計画"
+  },
+  {
+    "id": "JA-3",
+    "lang": "ja",
+    "weight": 1,
+    "pin": false,
+    "text": "聖地・コラボカフェ・イベント会場——“回りたい場所”を写真とメモで自分の地図に。ここらがAndroidでも公開。\niOS→ https://apps.apple.com/jp/app/kokora/id6789018848\nAndroid→ https://play.google.com/store/apps/details?id=org.akarilab.kokora\n#ここら #推し活 #地図アプリ"
+  },
+  {
+    "id": "EN-1",
+    "lang": "en",
+    "weight": 2,
+    "pin": false,
+    "text": "📍 kokora is now on Google Play! Save the places you love — a photo and a note, all on your own map. Never lose a good spot again. iOS & Android.\niOS→ https://apps.apple.com/jp/app/kokora/id6789018848\nAndroid→ https://play.google.com/store/apps/details?id=org.akarilab.kokora\n#travelapp #tripplanning #Android"
+  },
+  {
+    "id": "EN-2",
+    "lang": "en",
+    "weight": 1,
+    "pin": false,
+    "text": "Planning a trip to Japan? Save the shrines, castles, cafés and hot springs you want to visit — all on your own map, so you never get lost. kokora, now on iOS & Android.\niOS→ https://apps.apple.com/jp/app/kokora/id6789018848\nAndroid→ https://play.google.com/store/apps/details?id=org.akarilab.kokora\n#JapanTravel #tripplanning #travelapp"
+  }
+]
