@@ -1,28 +1,17 @@
-# PURPOSE: 熊本地震（令和8年）の災害支援テキストを @waveblasttaiyo へ1日8回投稿する。
-#          ここらプロモ用のリール投稿（post-jp / post-en）は Disable 済み。
-#          同じリポ・同じXアカウント・同じ Secrets を再利用し、動画なしのテキストのみを配信する。
+# PURPOSE: 熊本地震（令和8年）の災害支援テキストを @waveblasttaiyo へ投稿する。
+#          通常運転へ移行（2026-07-29）：災害は1日2本に縮小、主軸はここら(アプリ)投稿へ。
+#          同じXアカウント・同じ Secrets を再利用し、動画なしのテキストのみを配信する。
 #
-# ⚠️ 有効化はまことのOK後。下の schedule はコメントアウトしてあり、今は自動投稿は発火しない。
-#    レビュー完了後に schedule のコメントを外してコミットすると、翌枠から自動投稿が始まる。
-#
-# 投稿枠（JST）: 08:00 / 10:00 / 12:00 / 14:00 / 16:00 / 18:00 / 20:00 / 22:00（約2時間おき）
-# 内容は queue/support_queue.json の先頭から順番に1件ずつ。末尾まで出したら自動で止まる。
+# 投稿枠（JST）: 09:00(day) / 18:00(night) の2枠＝1日2本。band判定（poster側）で内容を選択。
+# 内容は queue/support_queue.json（裏取り済みの無難版）を band別に巡回。
+# cron は UTC 表記（JST = UTC+9）。
 
 name: Post kokora saigai support (JA)
 
 on:
-  # 有効化済み（2026-07-29 / 07-29 24h化）。停止は schedule をコメントアウト or ワークフローを Disable。
-  # 3時間毎の8枠＝1日8本。band判定（poster側）で 深夜/夜=night、日中=day を自動選択。
-  # cron は UTC 表記（JST = UTC+9）。
   schedule:
-    - cron: "0 15 * * *"   # JST 00:00  (night)
-    - cron: "0 18 * * *"   # JST 03:00  (night)
-    - cron: "0 21 * * *"   # JST 06:00  (night)
     - cron: "0 0 * * *"    # JST 09:00  (day)
-    - cron: "0 3 * * *"    # JST 12:00  (day)
-    - cron: "0 6 * * *"    # JST 15:00  (day)
     - cron: "0 9 * * *"    # JST 18:00  (night)
-    - cron: "0 12 * * *"   # JST 21:00  (night)
   workflow_dispatch:
     inputs:
       dry_run:
