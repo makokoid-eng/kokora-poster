@@ -1,0 +1,58 @@
+# PURPOSE: ここら(アプリ)のリリース告知（iOS＋Android）を @waveblasttaiyo へ投稿する。
+#          災害支援(post-support)を停止し、その枠（JST 09:00 / 18:00）を告知に置き換え。
+#          テキストのみ。告知期間（〜2026-08-21）は毎枠、以降は poster 側で decay。
+# 枠（JST）: 09:00 / 18:00 ＝ UTC 00:00 / 09:00
+name: Post kokora release announce
+
+on:
+  schedule:
+    - cron: "0 0 * * *"    # JST 09:00
+    - cron: "0 9 * * *"    # JST 18:00
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true で投稿せず、選ばれる本文だけ確認"
+        required: false
+        default: "true"
+
+concurrency:
+  group: kokora-announce-post
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install --quiet tweepy
+
+      - name: Post (announce)
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+        run: |
+          # schedule起動＝必ず実投稿。workflow_dispatch のときだけ dry_run で分岐。
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.dry_run }}" = "false" ]; then
+            python scripts/post_announce_to_x.py
+          else
+            python scripts/post_announce_to_x.py --dry-run
+          fi
+
+      - name: Save announce state
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.dry_run == 'false' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add queue/announce_state.json
+          git diff --staged --quiet || git commit -m "log: kokora リリース告知 投稿記録 $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
