@@ -44,7 +44,14 @@
       "band": "night",
       "category": "spot-避難所(車中泊)",
       "tweet_id": "2082585734607692183"
+    },
+    {
+      "at": "2026-07-30 11:40",
+      "band": "day",
+      "category": "充電(スマホ)",
+      "tweet_id": "2082657561308725536"
     }
   ],
-  "night_index": 5
+  "night_index": 5,
+  "day_index": 1
 }
