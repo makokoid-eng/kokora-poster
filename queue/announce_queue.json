@@ -4,6 +4,7 @@
     "lang": "ja",
     "weight": 3,
     "pin": true,
+    "media": "reels/jp09_sodateru.mp4",
     "text": "🎉 ここら、Androidでも公開！ iOSに続きGoogle Playでも使えます。行きたい場所を写真とメモで“自分の地図”に保存。旅先で迷わない、あなただけの地図を。📱iOS/Android両対応\niOS→ https://apps.apple.com/jp/app/kokora/id6789018848\nAndroid→ https://play.google.com/store/apps/details?id=org.akarilab.kokora\n#ここら #地図アプリ #Android"
   },
   {
@@ -11,6 +12,7 @@
     "lang": "ja",
     "weight": 1,
     "pin": false,
+    "media": "reels/jp01_sns_mitsukaranai.mp4",
     "text": "「保存したあのお店どこだっけ？」をなくしたくて作りました。SNSで見つけた行きたい場所を写真とメモで自分の地図に。ここら、Androidでも公開。\niOS→ https://apps.apple.com/jp/app/kokora/id6789018848\nAndroid→ https://play.google.com/store/apps/details?id=org.akarilab.kokora\n#ここら #地図アプリ #旅行計画"
   },
   {
@@ -18,6 +20,7 @@
     "lang": "ja",
     "weight": 1,
     "pin": false,
+    "media": "reels/jp10_kokorahen.mp4",
     "text": "聖地・コラボカフェ・イベント会場——“回りたい場所”を写真とメモで自分の地図に。ここらがAndroidでも公開。\niOS→ https://apps.apple.com/jp/app/kokora/id6789018848\nAndroid→ https://play.google.com/store/apps/details?id=org.akarilab.kokora\n#ここら #推し活 #地図アプリ"
   },
   {
@@ -25,6 +28,7 @@
     "lang": "en",
     "weight": 2,
     "pin": false,
+    "media": "reels/en09_grow_map.mp4",
     "text": "📍 kokora is now on Google Play! Save the places you love — a photo and a note, all on your own map. Never lose a good spot again. iOS & Android.\niOS→ https://apps.apple.com/jp/app/kokora/id6789018848\nAndroid→ https://play.google.com/store/apps/details?id=org.akarilab.kokora\n#travelapp #tripplanning #Android"
   },
   {
@@ -32,6 +36,7 @@
     "lang": "en",
     "weight": 1,
     "pin": false,
+    "media": "reels/en05_forgot_arrived.mp4",
     "text": "Planning a trip to Japan? Save the shrines, castles, cafés and hot springs you want to visit — all on your own map, so you never get lost. kokora, now on iOS & Android.\niOS→ https://apps.apple.com/jp/app/kokora/id6789018848\nAndroid→ https://play.google.com/store/apps/details?id=org.akarilab.kokora\n#JapanTravel #tripplanning #travelapp"
   }
 ]
