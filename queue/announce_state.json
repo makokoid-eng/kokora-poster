@@ -339,6 +339,13 @@
       "lang": "ja",
       "media": "announce/kokora_android_announce_ja.png",
       "tweet_id": "2106386097194373213"
+    },
+    {
+      "at": "2026-10-06 02:58",
+      "id": "EN-1",
+      "lang": "en",
+      "media": "announce/kokora_android_announce_en.png",
+      "tweet_id": "2107168651665375593"
     }
   ]
 }
