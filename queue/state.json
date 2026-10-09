@@ -1,5 +1,5 @@
 {
-  "ja_index": 5,
+  "ja_index": 6,
   "en_index": 8,
   "posted": [
     {
@@ -722,6 +722,13 @@
       "reel": "en03",
       "variant": "B",
       "tweet_id": "2108279381588345250"
+    },
+    {
+      "at": "2026-10-09 19:48",
+      "lang": "ja",
+      "reel": "jp02",
+      "variant": "C",
+      "tweet_id": "2108509828780089668"
     }
   ]
 }
